@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: thousand-year-old-vampire
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tyov-db
+          property: connectionString
+
+databases:
+  - name: tyov-db
+    databaseName: tyov
+    plan: free
